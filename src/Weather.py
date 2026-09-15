@@ -1,8 +1,10 @@
-import requests
 import csv
-import time
 import datetime
+import time
 from pathlib import Path
+
+import requests
+
 from Load_env import MY_API_KEY
 from Logging import My_logger
 
@@ -76,7 +78,7 @@ class Weather_Details:
         )
 
         fetched_data = req.json()
-        fetched_at = f"{datetime.datetime.now():%Y-%m-%d;%H:%M:%S}"
+        fetched_at = f"{datetime.datetime.now().astimezone():%Y-%m-%d;%H:%M:%S}"
 
         timezone = fetched_data["timezone"]
         hours = timezone // 3600

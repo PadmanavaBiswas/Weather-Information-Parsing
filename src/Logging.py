@@ -1,9 +1,12 @@
 import logging
 from pathlib import Path
 
+
 class My_logger:
     def __init__(self):
-        self.formatter = logging.Formatter("%(levelname)s:%(asctime)s:%(name)s:%(message)s")
+        self.formatter = logging.Formatter(
+            "%(levelname)s:%(asctime)s:%(name)s:%(message)s"
+        )
 
         self.info_logger = logging.getLogger("info")
         self.critical_logger = logging.getLogger("critical")
@@ -12,9 +15,17 @@ class My_logger:
         log_file_path = Path("../logs").absolute()
 
         for logger, filename, level in [
-            (self.info_logger,f"{log_file_path}/fetched_info.log", logging.INFO),
-            (self.critical_logger, f"{log_file_path}/fetched_critical.log", logging.CRITICAL),
-            (self.error_logger, f"{log_file_path}/fetched_exception.log", logging.ERROR)
+            (self.info_logger, f"{log_file_path}/fetched_info.log", logging.INFO),
+            (
+                self.critical_logger,
+                f"{log_file_path}/fetched_critical.log",
+                logging.CRITICAL,
+            ),
+            (
+                self.error_logger,
+                f"{log_file_path}/fetched_exception.log",
+                logging.ERROR,
+            ),
         ]:
             logger.setLevel(level)
             if not logger.handlers:
@@ -30,3 +41,4 @@ class My_logger:
 
     def log_exception(self, msg):
         self.error_logger.exception(msg)
+
